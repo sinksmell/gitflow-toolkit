@@ -14,7 +14,7 @@ import (
 	"github.com/mitchellh/go-homedir"
 )
 
-const InstallBaseDir = "/usr/local/bin"
+const InstallBaseDir = "/usr/bin"
 
 var GitFlowToolKitHome string
 var InstallPath string
