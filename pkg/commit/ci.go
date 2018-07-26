@@ -91,7 +91,7 @@ func InputSubject() string {
 		if strings.TrimSpace(string(line)) == "" {
 			return errors.New("Input is empty!")
 		} else if len(line) > 50 {
-			return errors.New("Input length must < 25!")
+			return errors.New("Input length must < 50!")
 		} else {
 			return nil
 		}
