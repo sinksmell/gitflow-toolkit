@@ -4,8 +4,6 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var cfgFile string
-
 var RootCmd = &cobra.Command{
 	Use:   "gitflow-toolkit",
 	Short: "Git Flow 辅助工具",

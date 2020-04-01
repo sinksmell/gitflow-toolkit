@@ -1,29 +1,23 @@
-BUILD_VERSION   := $(shell cat version)
-BUILD_TIME      := $(shell date "+%F %T")
-COMMIT_SHA1     := $(shell git rev-parse HEAD)
+# Golang standard bin directory.
+GOPATH ?= $(shell go env GOPATH)
+BIN_DIR := $(GOPATH)/bin
+GOLANGCI_LINT := $(BIN_DIR)/golangci-lint
 
-all:
-	gox -osarch="darwin/amd64 linux/386 linux/amd64" \
-        -output="dist/{{.Dir}}_{{.OS}}_{{.Arch}}" \
-    	-ldflags   "-X 'github.com/mritd/gitflow-toolkit/cmd.Version=${BUILD_VERSION}' \
-                    -X 'github.com/mritd/gitflow-toolkit/cmd.BuildTime=${BUILD_TIME}' \
-                    -X 'github.com/mritd/gitflow-toolkit/cmd.CommitID=${COMMIT_SHA1}'"
+#
+# Define all targets. At least the following commands are required:
+#
 
-release: all
-	ghr -u mritd -t ${GITHUB_RELEASE_TOKEN} -replace -recreate --debug ${BUILD_VERSION} dist
+# All targets.
+.PHONY: lint test build container push fmt
 
-clean:
-	rm -rf dist
+build: build-local
 
-install:
-	go install -ldflags "-X 'github.com/mritd/gitflow-toolkit/cmd.Version=${BUILD_VERSION}' \
-                         -X 'github.com/mritd/gitflow-toolkit/cmd.BuildTime=${BUILD_TIME}' \
-                         -X 'github.com/mritd/gitflow-toolkit/cmd.CommitID=${COMMIT_SHA1}'"
+# more info about `GOGC` env: https://github.com/golangci/golangci-lint#memory-usage-of-golangci-lint
+lint: $(GOLANGCI_LINT)
+	@GOGC=5 $(GOLANGCI_LINT) run
 
-.PHONY : all release clean install
+$(GOLANGCI_LINT):
+	curl -sfL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | sh -s -- -b $(BIN_DIR) v1.16.0
 
-.EXPORT_ALL_VARIABLES:
-
-GO111MODULE = on
-GOPROXY = https://goproxy.io
-GOSUMDB = sum.golang.google.cn
+fmt:
+	goimports -w ./

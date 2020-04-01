@@ -5,20 +5,28 @@ import (
 	"github.com/spf13/cobra"
 )
 
+// handleCheckOut wrap check cmd
+func handleCheckOut(cmd *cobra.Command, ct git.CommitType, args []string) {
+	switch len(args) {
+	case 1:
+		git.Checkout(ct, args[0], "")
+	case 2:
+		git.Checkout(ct, args[0], args[1])
+	default:
+		_ = cmd.Help()
+	}
+}
+
 // Create feature branch
 func NewFeatBranch() *cobra.Command {
 	return &cobra.Command{
-		Use:   "feat BRANCH_NAME",
+		Use:   "feat BRANCH_NAME [TRACK_BRANCH]",
 		Short: "Create feature branch",
 		Long: `
-Create a branch with a prefix of feat.`,
+Create a branch with a prefix of feature.`,
 		Aliases: []string{"git-feat"},
 		Run: func(cmd *cobra.Command, args []string) {
-			if len(args) != 1 {
-				_ = cmd.Help()
-			} else {
-				git.Checkout(git.FEAT, args[0])
-			}
+			handleCheckOut(cmd, git.FEAT, args)
 		},
 	}
 }
@@ -26,17 +34,13 @@ Create a branch with a prefix of feat.`,
 // Create fix branch
 func NewFixBranch() *cobra.Command {
 	return &cobra.Command{
-		Use:   "fix BRANCH_NAME",
+		Use:   "fix BRANCH_NAME [TRACK_BRANCH]",
 		Short: "Create fix branch",
 		Long: `
 Create a branch with a prefix of fix.`,
 		Aliases: []string{"git-fix"},
 		Run: func(cmd *cobra.Command, args []string) {
-			if len(args) != 1 {
-				_ = cmd.Help()
-			} else {
-				git.Checkout(git.FIX, args[0])
-			}
+			handleCheckOut(cmd, git.FIX, args)
 		},
 	}
 }
@@ -44,17 +48,13 @@ Create a branch with a prefix of fix.`,
 // Create hotfix branch
 func NewHotFixBranch() *cobra.Command {
 	return &cobra.Command{
-		Use:   "hotfix BRANCH_NAME",
+		Use:   "hotfix BRANCH_NAME [TRACK_BRANCH]",
 		Short: "Create hotfix branch",
 		Long: `
 Create a branch with a prefix of hotfix.`,
 		Aliases: []string{"git-hotfix"},
 		Run: func(cmd *cobra.Command, args []string) {
-			if len(args) != 1 {
-				_ = cmd.Help()
-			} else {
-				git.Checkout(git.HOTFIX, args[0])
-			}
+			handleCheckOut(cmd, git.HOTFIX, args)
 		},
 	}
 }
@@ -62,17 +62,13 @@ Create a branch with a prefix of hotfix.`,
 // Create perf branch
 func NewPerfBranch() *cobra.Command {
 	return &cobra.Command{
-		Use:   "perf BRANCH_NAME",
+		Use:   "perf BRANCH_NAME [TRACK_BRANCH]",
 		Short: "Create perf branch",
 		Long: `
 Create a branch with a prefix of perf.`,
 		Aliases: []string{"git-perf"},
 		Run: func(cmd *cobra.Command, args []string) {
-			if len(args) != 1 {
-				_ = cmd.Help()
-			} else {
-				git.Checkout(git.PERF, args[0])
-			}
+			handleCheckOut(cmd, git.PERF, args)
 		},
 	}
 }
@@ -80,17 +76,13 @@ Create a branch with a prefix of perf.`,
 // Create refactor branch
 func NewRefactorBranch() *cobra.Command {
 	return &cobra.Command{
-		Use:   "refactor BRANCH_NAME",
+		Use:   "refactor BRANCH_NAME [TRACK_BRANCH]",
 		Short: "Create refactor branch",
 		Long: `
 Create a branch with a prefix of refactor.`,
 		Aliases: []string{"git-refactor"},
 		Run: func(cmd *cobra.Command, args []string) {
-			if len(args) != 1 {
-				_ = cmd.Help()
-			} else {
-				git.Checkout(git.REFACTOR, args[0])
-			}
+			handleCheckOut(cmd, git.REFACTOR, args)
 		},
 	}
 }
@@ -98,17 +90,13 @@ Create a branch with a prefix of refactor.`,
 // Create test branch
 func NewTestBranch() *cobra.Command {
 	return &cobra.Command{
-		Use:   "test BRANCH_NAME",
+		Use:   "test BRANCH_NAME [TRACK_BRANCH]",
 		Short: "Create test branch",
 		Long: `
 Create a branch with a prefix of test.`,
 		Aliases: []string{"git-test"},
 		Run: func(cmd *cobra.Command, args []string) {
-			if len(args) != 1 {
-				_ = cmd.Help()
-			} else {
-				git.Checkout(git.TEST, args[0])
-			}
+			handleCheckOut(cmd, git.TEST, args)
 		},
 	}
 }
@@ -116,18 +104,13 @@ Create a branch with a prefix of test.`,
 // Create chore branch
 func NewChoreBranch() *cobra.Command {
 	return &cobra.Command{
-		Use:   "chore BRANCH_NAME",
+		Use:   "chore BRANCH_NAME [TRACK_BRANCH]",
 		Short: "Create chore branch",
 		Long: `
 Create a branch with a prefix of chore.`,
 		Aliases: []string{"git-chore"},
 		Run: func(cmd *cobra.Command, args []string) {
-			if len(args) != 1 {
-				_ = cmd.Help()
-			} else {
-				git.Checkout(git.CHORE, args[0])
-			}
-
+			handleCheckOut(cmd, git.CHORE, args)
 		},
 	}
 }
@@ -135,17 +118,13 @@ Create a branch with a prefix of chore.`,
 // Create style branch
 func NewStyleBranch() *cobra.Command {
 	return &cobra.Command{
-		Use:   "style BRANCH_NAME",
+		Use:   "style BRANCH_NAME [TRACK_BRANCH]",
 		Short: "Create style branch",
 		Long: `
 Create a branch with a prefix of style.`,
 		Aliases: []string{"git-style"},
 		Run: func(cmd *cobra.Command, args []string) {
-			if len(args) != 1 {
-				_ = cmd.Help()
-			} else {
-				git.Checkout(git.STYLE, args[0])
-			}
+			handleCheckOut(cmd, git.STYLE, args)
 		},
 	}
 }
@@ -153,17 +132,13 @@ Create a branch with a prefix of style.`,
 // Create docs branch
 func NewDocsBranch() *cobra.Command {
 	return &cobra.Command{
-		Use:   "docs BRANCH_NAME",
+		Use:   "docs BRANCH_NAME [TRACK_BRANCH]",
 		Short: "Create docs branch",
 		Long: `
 Create a branch with a prefix of docs.`,
 		Aliases: []string{"git-docs"},
 		Run: func(cmd *cobra.Command, args []string) {
-			if len(args) != 1 {
-				_ = cmd.Help()
-			} else {
-				git.Checkout(git.DOCS, args[0])
-			}
+			handleCheckOut(cmd, git.DOCS, args)
 		},
 	}
 }

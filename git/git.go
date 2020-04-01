@@ -1,11 +1,10 @@
 package git
 
 import (
+	"fmt"
 	"strings"
 
 	"github.com/mritd/gitflow-toolkit/utils"
-
-	"fmt"
 )
 
 type CommitType string
@@ -15,7 +14,7 @@ type RepoType string
 const Cmd = "git"
 
 const (
-	FEAT     CommitType = "feat"
+	FEAT     CommitType = "feature"
 	FIX      CommitType = "fix"
 	DOCS     CommitType = "docs"
 	STYLE    CommitType = "style"
@@ -71,7 +70,11 @@ func Rebase(sourceBranch string, targetBranch string) {
 	utils.MustExec(Cmd, "push", "origin", sourceBranch)
 }
 
-func Checkout(prefix CommitType, branch string) {
+func Checkout(prefix CommitType, branch string, remote string) {
+	if len(remote) != 0 {
+		utils.MustExec(Cmd, "checkout", "-b", string(prefix)+"/"+branch, "-t", remote)
+		return
+	}
 	utils.MustExec(Cmd, "checkout", "-b", string(prefix)+"/"+branch)
 }
 
