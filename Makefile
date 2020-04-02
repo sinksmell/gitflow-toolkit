@@ -2,15 +2,20 @@
 GOPATH ?= $(shell go env GOPATH)
 BIN_DIR := $(GOPATH)/bin
 GOLANGCI_LINT := $(BIN_DIR)/golangci-lint
+OUTPUT_DIR := ./bin
+TARGET := gitflow-toolkit
 
 #
 # Define all targets. At least the following commands are required:
 #
 
 # All targets.
-.PHONY: lint test build container push fmt
+.PHONY: lint test build  fmt clean
 
 build: build-local
+
+build-local:
+	  go build -i -v -o $(OUTPUT_DIR)/$(TARGET)  -ldflags "-s -w " ./
 
 # more info about `GOGC` env: https://github.com/golangci/golangci-lint#memory-usage-of-golangci-lint
 lint: $(GOLANGCI_LINT)
@@ -21,3 +26,11 @@ $(GOLANGCI_LINT):
 
 fmt:
 	goimports -w ./
+clean:
+	@-rm -vrf ${OUTPUT_DIR}
+
+install: build
+	sudo $(OUTPUT_DIR)/$(TARGET) install
+
+uninstall: build
+	sudo $(OUTPUT_DIR)/$(TARGET) uninstall
