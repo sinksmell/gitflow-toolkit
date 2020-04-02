@@ -7,7 +7,7 @@ import (
 	"strings"
 	"text/template"
 
-	"github.com/mritd/gitflow-toolkit/utils"
+	"github.com/sinksmell/gitflow-toolkit/utils"
 	"github.com/mritd/promptx"
 	"github.com/pkg/errors"
 )

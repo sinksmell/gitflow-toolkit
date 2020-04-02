@@ -1,4 +1,4 @@
-module github.com/mritd/gitflow-toolkit
+module github.com/sinksmell/gitflow-toolkit
 
 go 1.13
 

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/mritd/gitflow-toolkit/git"
+	"github.com/sinksmell/gitflow-toolkit/git"
 
 	"github.com/spf13/cobra"
 )

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/mritd/gitflow-toolkit/utils"
+	"github.com/sinksmell/gitflow-toolkit/utils"
 )
 
 type CommitType string

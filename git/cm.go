@@ -7,7 +7,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/mritd/gitflow-toolkit/utils"
+	"github.com/sinksmell/gitflow-toolkit/utils"
 )
 
 func CheckCommitMessage(file string) {

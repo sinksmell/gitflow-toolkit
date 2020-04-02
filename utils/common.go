@@ -6,10 +6,9 @@ import (
 	"io/ioutil"
 	"os"
 	"os/exec"
+	"os/user"
 	"path/filepath"
 	"runtime"
-
-	"os/user"
 
 	"github.com/mitchellh/go-homedir"
 )
