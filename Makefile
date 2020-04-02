@@ -4,6 +4,7 @@ BIN_DIR := $(GOPATH)/bin
 GOLANGCI_LINT := $(BIN_DIR)/golangci-lint
 OUTPUT_DIR := ./bin
 TARGET := gitflow-toolkit
+HOME := $(HOME)
 
 #
 # Define all targets. At least the following commands are required:
@@ -30,7 +31,7 @@ clean:
 	@-rm -vrf ${OUTPUT_DIR}
 
 install: build
-	sudo $(OUTPUT_DIR)/$(TARGET) install
+	sudo HOME=$(HOME) $(OUTPUT_DIR)/$(TARGET) install
 
 uninstall: build
-	sudo $(OUTPUT_DIR)/$(TARGET) uninstall
+	sudo HOME=$(HOME) $(OUTPUT_DIR)/$(TARGET) uninstall
