@@ -22,7 +22,7 @@ var CurrentPath string
 func init() {
 
 	var err error
-
+	homedir.Reset()
 	home, err := homedir.Dir()
 	CheckAndExit(err)
 

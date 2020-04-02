@@ -7,9 +7,9 @@ import (
 	"strings"
 	"text/template"
 
-	"github.com/sinksmell/gitflow-toolkit/utils"
 	"github.com/mritd/promptx"
 	"github.com/pkg/errors"
+	"github.com/sinksmell/gitflow-toolkit/utils"
 )
 
 type TypeMessage struct {

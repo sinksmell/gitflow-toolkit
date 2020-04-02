@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"github.com/sinksemll/gitflow-toolkit/git"
+	"github.com/sinksmell/gitflow-toolkit/git"
 	"github.com/spf13/cobra"
 )
 
