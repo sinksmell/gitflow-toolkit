@@ -14,7 +14,7 @@ type RepoType string
 const Cmd = "git"
 
 const (
-	FEAT     CommitType = "feature"
+	FEAT     CommitType = "feat"
 	FIX      CommitType = "fix"
 	DOCS     CommitType = "docs"
 	STYLE    CommitType = "style"
@@ -71,6 +71,9 @@ func Rebase(sourceBranch string, targetBranch string) {
 }
 
 func Checkout(prefix CommitType, branch string, remote string) {
+	if prefix == FEAT {
+		prefix = "feature" // 分支名使用完整单词
+	}
 	if len(remote) != 0 {
 		utils.MustExec(Cmd, "checkout", "-b", string(prefix)+"/"+branch, "-t", remote)
 		return

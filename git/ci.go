@@ -149,7 +149,6 @@ func Commit(cm *Message) {
 	if cm.Body == "" {
 		cm.Body = cm.Subject
 	}
-
 	t, err := template.New("commitMessage").Parse(CommitTpl)
 	utils.CheckAndExit(err)
 
