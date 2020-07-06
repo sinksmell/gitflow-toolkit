@@ -18,23 +18,19 @@ func CheckCommitMessage(file string) {
 	utils.CheckAndExit(err)
 
 	commitTypes := reg.FindAllStringSubmatch(string(b), -1)
-	if len(commitTypes) != 1 {
-		checkFailed()
-	} else {
-		switch commitTypes[0][1] {
-		case string(FEAT):
-		case string(FIX):
-		case string(DOCS):
-		case string(STYLE):
-		case string(REFACTOR):
-		case string(TEST):
-		case string(CHORE):
-		case string(PERF):
-		case string(HOTFIX):
-		default:
-			if !strings.HasPrefix(string(b), "Merge branch") {
-				checkFailed()
-			}
+	switch commitTypes[0][1] {
+	case string(FEAT):
+	case string(FIX):
+	case string(DOCS):
+	case string(STYLE):
+	case string(REFACTOR):
+	case string(TEST):
+	case string(CHORE):
+	case string(PERF):
+	case string(HOTFIX):
+	default:
+		if !strings.HasPrefix(string(b), "Merge branch") {
+			checkFailed()
 		}
 	}
 }
