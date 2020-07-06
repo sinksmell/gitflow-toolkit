@@ -18,6 +18,10 @@ func CheckCommitMessage(file string) {
 	utils.CheckAndExit(err)
 
 	commitTypes := reg.FindAllStringSubmatch(string(b), -1)
+	if len(commitTypes) == 0 || len(commitTypes[0]) == 0 {
+		checkFailed()
+		return
+	}
 	switch commitTypes[0][1] {
 	case string(FEAT):
 	case string(FIX):
