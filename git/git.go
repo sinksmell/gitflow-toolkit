@@ -35,7 +35,7 @@ const CommitTpl = `{{ .Type }}({{ .Scope }}): {{ .Subject }}
 {{ .Sob }}
 `
 
-const CommitMessagePattern = `^(?:fixup!\s*)?(\w*)(\(([\w\$\.\*/-].*)\))?\: (.*)|^Merge\ branch(.*)`
+const CommitMessagePattern = `^(?:fixup!\s*)?(\w*)(\(([\w\$\.\*/-].*)\))?\: (.*)|^Merge\ branch(.*)|^Merge\ remote-tracking\ branch(.*)`
 
 func CheckGitProject() {
 	utils.MustExecNoOut(Cmd, "rev-parse", "--show-toplevel")

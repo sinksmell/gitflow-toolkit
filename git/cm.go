@@ -33,7 +33,8 @@ func CheckCommitMessage(file string) {
 	case string(PERF):
 	case string(HOTFIX):
 	default:
-		if !strings.HasPrefix(string(b), "Merge branch") {
+		if !strings.HasPrefix(string(b), "Merge branch") &&
+			!strings.HasPrefix(string(b), "Merge remote-tracking branch") {
 			checkFailed()
 		}
 	}
