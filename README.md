@@ -38,6 +38,7 @@
 
 
 ## 安装与卸载
+- 手动安装
 
 ```shell
 # 1. 克隆代码
@@ -51,3 +52,16 @@ make install
 make uninstall
 ```
 
+- 下载 release 安装
+
+``` shell
+# 1. 到 release 标签下载对应的二进制文件压缩包，解压
+
+# 2. 找到解压后的二进制文件，在命令行执行以下命令
+# 安装
+sudo gitflow-toolkit install
+
+# 卸载
+sudo gitflow-toolkit uninstall
+
+```
